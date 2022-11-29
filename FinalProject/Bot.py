@@ -15,7 +15,9 @@ class Singleton:
 
 
 
-class Add(Singleton):
+class Add:
+    def __init__(self):
+        self.book = AddressBook()
     def func(self, action):
         name = Name(input("Name: ")).value.strip()
         phones = Phone().value
@@ -27,7 +29,9 @@ class Add(Singleton):
         return self.book.add(record)
 
 
-class Search(Singleton):
+class Search:
+    def __init__(self):
+        self.book = AddressBook()
     def func(self, action):
         print("There are following categories: \nName \nPhones \nBirthday \nEmail \nStatus \nNote")
         category = input('Search category: ')
@@ -40,7 +44,9 @@ class Search(Singleton):
                 print(result)
 
 
-class Edit(Singleton):
+class Edit:
+    def __init__(self):
+        self.book = AddressBook()
     def func(self, action):
         contact_name = input('Contact name: ')
         parameter = input('Which parameter to edit(name, phones, birthday, status, email, note): ').strip()
@@ -48,35 +54,45 @@ class Edit(Singleton):
         return self.book.edit(contact_name, parameter, new_value)
 
 
-class Remove(Singleton):
+class Remove:
+    def __init__(self):
+        self.book = AddressBook()
     def func(self, action):
         pattern = input("Remove (contact name or phone): ")
         return self.book.remove(pattern)
 
 
-class Save(Singleton):
+class Save:
+    def __init__(self):
+        self.book = AddressBook()
     def func(self, action):
         file_name = input("File name: ")
         return self.book.save(file_name)
 
 
-class Load(Singleton):
+class Load:
+    def __init__(self):
+        self.book = AddressBook()
     def func(self, action):
         file_name = input("File name: ")
         return self.book.load(file_name)
 
 
-class Congratulate(Singleton):
+class Congratulate:
+    def __init__(self):
+        self.book = AddressBook()
     def func(self, action):
         print(self.book.congratulate())
 
 
-class View(Singleton):
+class View:
+    def __init__(self):
+        self.book = AddressBook()
     def func(self, action):
         print(self.book)
 
 
-class Exit(Singleton):
+class Exit:
     def func(self, action):
         pass
 
