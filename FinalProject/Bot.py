@@ -2,16 +2,20 @@ from AddressBook import *
 from abc import ABC, abstractmethod
 
 
-class Handles(ABC):
+class Singleton:
+    __instance = None
+
     def __init__(self):
         self.book = AddressBook()
 
-    @abstractmethod
-    def func(self, action):
-        pass
+    def __new__(cls):
+        if cls.__instance is None:
+            cls.__instance = super().__new__(Singleton)
+        return cls.__instance
 
 
-class Add(Handles):
+
+class Add(Singleton):
     def func(self, action):
         name = Name(input("Name: ")).value.strip()
         phones = Phone().value
@@ -23,7 +27,7 @@ class Add(Handles):
         return self.book.add(record)
 
 
-class Search(Handles):
+class Search(Singleton):
     def func(self, action):
         print("There are following categories: \nName \nPhones \nBirthday \nEmail \nStatus \nNote")
         category = input('Search category: ')
@@ -36,7 +40,7 @@ class Search(Handles):
                 print(result)
 
 
-class Edit(Handles):
+class Edit(Singleton):
     def func(self, action):
         contact_name = input('Contact name: ')
         parameter = input('Which parameter to edit(name, phones, birthday, status, email, note): ').strip()
@@ -44,35 +48,35 @@ class Edit(Handles):
         return self.book.edit(contact_name, parameter, new_value)
 
 
-class Remove(Handles):
+class Remove(Singleton):
     def func(self, action):
         pattern = input("Remove (contact name or phone): ")
         return self.book.remove(pattern)
 
 
-class Save(Handles):
+class Save(Singleton):
     def func(self, action):
         file_name = input("File name: ")
         return self.book.save(file_name)
 
 
-class Load(Handles):
+class Load(Singleton):
     def func(self, action):
         file_name = input("File name: ")
         return self.book.load(file_name)
 
 
-class Congratulate(Handles):
+class Congratulate(Singleton):
     def func(self, action):
         print(self.book.congratulate())
 
 
-class View(Handles):
+class View(Singleton):
     def func(self, action):
         print(self.book)
 
 
-class Exit(Handles):
+class Exit(Singleton):
     def func(self, action):
         pass
 
@@ -111,4 +115,3 @@ class Bot:
             exit.func(action)
         else:
             print("There is no such command!")
-
