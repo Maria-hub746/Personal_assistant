@@ -1,19 +1,4 @@
 from AddressBook import *
-from abc import ABC, abstractmethod
-
-
-class Singleton:
-    __instance = None
-
-    def __init__(self):
-        self.book = AddressBook()
-
-    def __new__(cls):
-        if cls.__instance is None:
-            cls.__instance = super().__new__(Singleton)
-        return cls.__instance
-
-
 
 class Add:
     def __init__(self):
